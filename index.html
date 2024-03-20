@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="/assets/js/shared.js" defer></script>
+  <script src="/assets/js/animation.js" defer></script>
+</head>
+
+<body>
+
+  <header class="w-full">    
+    <div class="h-[33px] md:h-[45px] bg-dark-blue">
+      <ul class="h-full flex flex-row items-center justify-end gap-x-3 mr-3 2xs:gap-x-7 2xs:mr-7">
+        <li>
+          <a href="/sign-in.html" class="flex flex-row items-center gap-x-[6px] justify-center">
+            <svg viewBox="0 0 21 22" xmlns="http://www.w3.org/2000/svg" class="w-[21px] h-[22px] inline">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4996 16.2501C8.78706 16.2501 7.28241 15.4185 6.32271 14.1501C7.28241 12.8817 8.78706 12.0501 10.4996 12.0501C12.2122 12.0501 13.7168 12.8817 14.6765 14.1501C13.7168 15.4185 12.2122 16.2501 10.4996 16.2501ZM10.4996 5.7501C11.6588 5.7501 12.5996 6.69195 12.5996 7.8501C12.5996 9.00825 11.6588 9.9501 10.4996 9.9501C9.34041 9.9501 8.39961 9.00825 8.39961 7.8501C8.39961 6.69195 9.34041 5.7501 10.4996 5.7501ZM10.4996 2.6001C5.86806 2.6001 2.09961 6.36855 2.09961 11.0001C2.09961 15.6316 5.86806 19.4001 10.4996 19.4001C15.1312 19.4001 18.8996 15.6316 18.8996 11.0001C18.8996 6.36855 15.1312 2.6001 10.4996 2.6001Z" fill="#FEFEFE"/>
+            </svg>
+            <span class="text-grayscale-white text-size-body3">Sign in</span>              
+          </a>            
+        </li>
+        <li>
+          <button type="button" class="text-grayscale-white text-size-body3" id="toggle-navp-claims" aria-controls="navp-claims" aria-expanded="false">Claims</button>
+          <ul class="absolute top-[33px] md:top-[45px] right-3 2xs:right-7 space-y-1 p-1 rounded shadow shadow-[#727070]/40 bg-grayscale-white hidden data-[visible=true]:block z-30" id="navp-claims" data-visible="false">
+            <li>
+              <a href="/claims/business-insurance.html" class="text-size-body2 lg:text-size-body3">Business Insurance</a>
+            </li>
+            <li>
+              <a href="/claims/personal-insurance.html" class="text-size-body2 lg:text-size-body3">Personal Insurance</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <button type="button" class="align-middle" id="toggle-navp-search" aria-controls="navp-search" aria-expanded="false">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
+              <path d="M15.8889 14.6516L12.0956 10.8582C12.0237 10.7863 11.93 10.7489 11.83 10.7489H11.4175C12.4018 9.60835 12.9986 8.12413 12.9986 6.49931C12.9983 2.90906 10.0895 0 6.49931 0C2.90906 0 0 2.90906 0 6.49931C0 10.0895 2.90906 12.9986 6.49931 12.9986C8.12413 12.9986 9.60835 12.4018 10.7489 11.4175V11.83C10.7489 11.93 10.7895 12.0237 10.8582 12.0956L14.6516 15.8889C14.7984 16.0358 15.0359 16.0358 15.1828 15.8889L15.8889 15.1828C16.0358 15.0359 16.0358 14.7984 15.8889 14.6516ZM6.49931 11.4988C3.7371 11.4988 1.49984 9.26151 1.49984 6.49931C1.49984 3.7371 3.7371 1.49984 6.49931 1.49984C9.26151 1.49984 11.4988 3.7371 11.4988 6.49931C11.4988 9.26151 9.26151 11.4988 6.49931 11.4988Z" fill="#FEFEFE"/>
+            </svg>                
+          </button>
+          <div class="h-[88px] md:h-[77px] bg-dark-blue absolute top-[33px] md:top-[45px] left-0 right-0 hidden data-[visible=true]:block z-30" id="navp-search" data-visible="false">
+            <div class="mx-3 2xs:mx-7 h-full flex flex-row items-center justify-center md:justify-between">
+              <svg viewBox="0 0 178 51" xmlns="http://www.w3.org/2000/svg" class="w-[178px] h-[51px] hidden md:block">
+                <path d="M81.0664 38.7356V37.5881C84.4062 37.2603 84.5714 37.0539 84.5286 32.7189L84.4062 16.0224H84.2411L74.1789 38.4442H73.3531L64.1167 16.5931H64.0372L63.4194 28.2564C63.2542 31.6139 63.2542 33.411 63.297 35.0503C63.3765 37.0114 64.3675 37.3028 67.0895 37.5881V38.7356H57.486V37.5881C59.8777 37.3028 60.7035 36.8535 60.991 35.1353C61.1989 33.7024 61.4436 31.8992 61.7739 27.6492L62.3489 19.1371C62.722 13.8185 62.5141 13.6546 58.7644 13.2842V12.1367H65.5235L74.9251 32.5974L84.449 12.1367H91.4589V13.2842C87.8317 13.6121 87.5442 13.691 87.6665 17.9106L88.0763 32.7249C88.1987 37.0599 88.321 37.2664 91.9116 37.5942V38.7417H81.0664V38.7356Z" fill="#FEFEFE"/>
+                <path d="M102.689 23.7272C101.197 25.6761 98.9276 27.1575 96.9274 27.1575C92.6579 27.1575 90.15 23.7272 90.15 20.1268C90.15 17.5343 91.2693 15.2818 93.5387 13.5333C95.3003 12.1854 97.3372 11.6511 98.6585 11.6511C99.9797 11.6511 101.13 12.0883 101.674 12.5254C102.114 12.8958 102.218 13.1993 102.218 13.5697C102.218 14.274 101.472 15.0147 101.099 15.0147C100.928 15.0147 100.763 14.9115 100.457 14.6443C99.4414 13.7033 98.2548 13.2661 97.0681 13.2661C94.8293 13.2661 92.8658 15.1179 92.8658 18.6454C92.8658 23.3204 96.0833 24.8686 97.9856 24.8686C99.4414 24.8686 100.561 24.4618 102.121 23.0168L102.696 23.7211L102.689 23.7272Z" fill="#FEFEFE"/>
+                <path d="M130.521 27.5219C128.05 27.8923 127.885 28.0926 127.885 30.509V33.988C127.885 35.4208 127.928 36.7323 128.172 37.8373C125.615 38.4505 122.233 39.349 118.936 39.349C109.865 39.349 103.803 33.7451 103.803 25.6398C103.803 16.144 111.473 11.5237 119.554 11.5237C122.973 11.5237 126.148 12.4223 127.469 12.7076C127.591 14.1405 127.799 16.393 128.129 19.0887L126.973 19.3315C125.982 14.3408 122.851 12.9869 118.936 12.9869C112.629 12.9869 108.011 17.5708 108.011 25.1419C108.011 31.0373 111.516 37.9101 119.474 37.9101C120.875 37.9101 122.153 37.6248 123.059 37.1755C123.884 36.7262 124.38 36.2344 124.38 34.5162V31.0373C124.38 28.0926 124.092 27.8437 120.049 27.5158V26.4108H130.521V27.5158V27.5219Z" fill="#FEFEFE"/>
+                <path d="M136.901 24.6986C138.137 22.6525 139.91 20.3636 141.892 20.3636C143.293 20.3636 144.284 21.4261 144.284 22.4097C144.284 23.2293 143.746 24.0489 142.963 24.4132C142.467 24.6197 142.094 24.5772 141.849 24.3282C141.275 23.715 140.779 23.4661 140.118 23.4661C139.048 23.4661 137.727 24.6925 136.821 26.9875V34.4736C136.821 37.1754 137.029 37.4182 140.204 37.6672V38.7297H130.723V37.6672C133.28 37.4243 133.567 37.1754 133.567 34.4736V26.0039C133.567 23.3022 133.359 23.1382 131.01 22.8104V21.9118C133.029 21.5839 134.846 21.0922 136.821 20.2361V24.6986H136.901Z" fill="#FEFEFE"/>
+                <path d="M144.357 38.7359V37.6734C146.957 37.4305 147.245 37.1816 147.245 34.4009V25.9737C147.245 23.4359 147.122 23.2719 144.645 22.8651V21.8816C146.749 21.5537 148.682 21.0194 150.499 20.2848V34.4009C150.499 37.1816 150.786 37.4305 153.429 37.6734V38.7359H144.357ZM146.541 14.7173C146.541 13.4909 147.532 12.5923 148.645 12.5923C149.759 12.5923 150.707 13.4909 150.707 14.7173C150.707 15.8223 149.801 16.8059 148.603 16.8059C147.532 16.8059 146.541 15.8223 146.541 14.7173Z" fill="#FEFEFE"/>
+                <path d="M166.213 20.8492V19.9506C166.213 18.6817 166.378 17.4978 166.665 16.5931C166.953 15.6885 167.614 13.6849 169.84 11.8028C171.284 10.5338 172.77 9.7992 174.373 9.59277C175.773 9.63527 176.972 10.206 177.627 10.9831C178 11.4324 178.037 11.9667 177.835 12.416C177.712 12.7438 177.462 13.0717 177.052 13.3996C176.679 13.6849 176.312 13.6849 175.939 13.2781C175.113 12.5435 173.963 11.7663 172.599 11.7663C171.528 11.7663 170.868 12.2581 170.415 12.9928C169.877 13.7699 169.424 15.7371 169.467 19.2099V20.8492H174.33C174.575 21.2196 174.373 22.1971 173.92 22.446H169.467V34.2306C169.467 37.2603 169.754 37.3817 173.015 37.7096V38.7296H163.283V37.6671C165.919 37.4242 166.213 37.2178 166.213 34.516V22.446H163.326L163.161 22.0392L164.274 20.8553H166.213V20.8492Z" fill="#FEFEFE"/>
+                <path d="M156.187 20.8492V19.9506C156.187 18.6817 156.352 17.4978 156.64 16.5931C156.927 15.6885 157.588 13.6849 159.815 11.8028C161.258 10.5338 162.745 9.7992 164.347 9.59277C165.748 9.63527 166.947 10.206 167.601 10.9831C167.974 11.4324 168.011 11.9667 167.809 12.416C167.687 12.7438 167.436 13.0717 167.026 13.3996C166.653 13.6849 166.286 13.6849 165.913 13.2781C165.087 12.5435 163.937 11.7663 162.573 11.7663C161.503 11.7663 160.842 12.2581 160.39 12.9928C159.851 13.7699 159.399 15.7371 159.441 19.2099V20.8492H164.304C164.549 21.2196 164.347 22.1971 163.895 22.446H159.441V34.2306C159.441 37.2603 159.729 37.3817 162.989 37.7096V38.7296H153.257V37.6671C155.894 37.4242 156.187 37.2178 156.187 34.516V22.446H153.3L153.135 22.0392L154.248 20.8553H156.187V20.8492Z" fill="#FEFEFE"/>
+                <path d="M39.6126 13.5271C33.9545 31.3042 18.7725 44.03 18.7725 44.03C22.9381 48.4925 26.0883 50.6357 26.0883 50.6357C39.6065 38.8753 45.9863 25.9492 48.9713 17.0303C48.9713 17.0303 45.6805 15.221 39.6065 13.5271H39.6126Z" fill="#FEFEFE"/>
+                <path d="M13.0533 11.7482C34.3338 6.86681 49.4791 15.4579 49.4791 15.4579C51.2591 9.66574 51.5404 5.92574 51.5404 5.92574C34.5662 -1.74248 19.9531 -0.424979 10.6677 2.04609C10.6677 2.04609 11.4874 7.45573 13.0533 11.7482Z" fill="#FEFEFE"/>
+                <path d="M24.8405 35.8276C11.8422 20.7948 9.15691 2.47119 9.15691 2.47119C3.35203 4.18941 0 6.22941 0 6.22941C3.32756 23.8001 11.4446 35.8398 17.7511 42.9069C17.7511 42.9069 22.7975 38.2623 24.8405 35.8276Z" fill="#FEFEFE"/>
+                <path d="M13.5977 13.333C13.5977 13.333 24.7426 10.0241 37.9672 13.1144C37.9672 13.1144 35.4165 23.3205 25.9537 34.5223C25.9537 34.5223 17.7144 25.8523 13.5916 13.333H13.5977Z" fill="#FEFEFE"/>
+              </svg>
+              <div class="relative">
+                <div class="flex flex-row gap-x-[6px]">
+                  <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg" class="w-[22px] h-[22px]">
+                    <path d="M21.8473 20.1459L16.6314 14.93C16.5326 14.8312 16.4037 14.7797 16.2662 14.7797H15.6991C17.0525 13.2115 17.8731 11.1707 17.8731 8.93655C17.8727 3.99996 13.8731 0 8.93655 0C3.99996 0 0 3.99996 0 8.93655C0 13.8731 3.99996 17.8731 8.93655 17.8731C11.1707 17.8731 13.2115 17.0525 14.7797 15.6991V16.2662C14.7797 16.4037 14.8355 16.5326 14.93 16.6314L20.1459 21.8473C20.3478 22.0492 20.6744 22.0492 20.8763 21.8473L21.8473 20.8763C22.0492 20.6744 22.0492 20.3478 21.8473 20.1459ZM8.93655 15.8108C5.13851 15.8108 2.06228 12.7346 2.06228 8.93655C2.06228 5.13851 5.13851 2.06228 8.93655 2.06228C12.7346 2.06228 15.8108 5.13851 15.8108 8.93655C15.8108 12.7346 12.7346 15.8108 8.93655 15.8108Z" class="fill-grayscale-gray" />
+                  </svg>
+                  <form action="/index.html" method="post">
+                    <input type="search" name="s" id="s" placeholder="Search" aria-label="Search" class="outline-none border-b-2 border-solid border-grayscale-gray bg-dark-blue placeholder:text-grayscale-light-gray text-grayscale-gray focus:placeholder:text-transparent 2xs:w-[330px] md:w-[348px]">
+                  </form>
+                  <button type="button" id="clo-navp-search">
+                    <svg viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg" class="w-[14px] h-[14px] absolute -top-3 right-0 md:hidden">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M5.89468 7.00005L6.73034e-06 12.8947L1.10527 14L6.99994 8.10531L12.8947 14.0001L14 12.8948L8.1052 7.00005L14 1.10526L12.8947 0L6.99994 5.89479L1.10526 0.000104174L0 1.10537L5.89468 7.00005Z" class="fill-grayscale-white" />
+                    </svg>
+                  </button>                  
+                </div>
+                                                
+              </div>
+            </div>                                                            
+          </div>
+        </li>
+      </ul>
+    </div>
+    <nav class="relative">
+      <div class="h-[88px] md:h-[77px]">
+        <div class="mx-3 2xs:mx-7 h-full flex flex-row items-center justify-between">
+          <a href="/index.html">
+            <svg viewBox="0 0 146 42" xmlns="http://www.w3.org/2000/svg" class="w-[146px] h-[42px] md:w-[178px] md:h-[51px]">
+              <path d="M66.4936 31.9001V30.9551C69.233 30.6851 69.3684 30.5151 69.3333 26.9451L69.233 13.1951H69.0975L60.8442 31.6601H60.1669L52.591 13.6651H52.5257L52.019 23.2701C51.8835 26.0351 51.8835 27.5151 51.9187 28.8651C51.9839 30.4801 52.7967 30.7201 55.0293 30.9551V31.9001H47.1523V30.9551C49.1141 30.7201 49.7914 30.3501 50.0272 28.9351C50.1978 27.7551 50.3985 26.2701 50.6694 22.7701L51.141 15.7601C51.447 11.3801 51.2765 11.2451 48.2009 10.9401V9.99512H53.7449L61.4563 26.8451L69.2681 9.99512H75.0178V10.9401C72.0426 11.2101 71.8068 11.2751 71.9071 14.7501L72.2433 26.9501C72.3436 30.5201 72.444 30.6901 75.389 30.9601V31.9051H66.4936V31.9001Z" fill="#298CC8" />
+              <path d="M84.2286 19.5402C83.0044 21.1452 81.143 22.3652 79.5024 22.3652C76.0004 22.3652 73.9434 19.5402 73.9434 16.5752C73.9434 14.4402 74.8615 12.5852 76.7229 11.1452C78.1678 10.0352 79.8385 9.59521 80.9223 9.59521C82.006 9.59521 82.9492 9.95522 83.3957 10.3152C83.757 10.6202 83.8423 10.8702 83.8423 11.1752C83.8423 11.7552 83.2302 12.3652 82.9241 12.3652C82.7836 12.3652 82.6482 12.2802 82.3973 12.0602C81.5645 11.2852 80.5911 10.9252 79.6178 10.9252C77.7815 10.9252 76.171 12.4502 76.171 15.3552C76.171 19.2052 78.81 20.4802 80.3704 20.4802C81.5645 20.4802 82.4826 20.1452 83.762 18.9552L84.2336 19.5352L84.2286 19.5402Z" fill="#298CC8" />
+              <path d="M107.056 22.6652C105.029 22.9702 104.893 23.1352 104.893 25.1252V27.9902C104.893 29.1702 104.928 30.2502 105.129 31.1602C103.032 31.6652 100.257 32.4052 97.5531 32.4052C90.1127 32.4052 85.1406 27.7902 85.1406 21.1152C85.1406 13.2952 91.4322 9.49023 98.0599 9.49023C100.864 9.49023 103.468 10.2302 104.552 10.4652C104.652 11.6452 104.823 13.5002 105.094 15.7202L104.146 15.9202C103.333 11.8102 100.764 10.6952 97.5531 10.6952C92.3804 10.6952 88.5924 14.4702 88.5924 20.7052C88.5924 25.5602 91.4673 31.2202 97.9946 31.2202C99.1436 31.2202 100.192 30.9852 100.935 30.6152C101.612 30.2452 102.018 29.8402 102.018 28.4252V25.5602C102.018 23.1352 101.783 22.9302 98.4663 22.6602V21.7502H107.056V22.6602V22.6652Z" fill="#298CC8" />
+              <path d="M112.29 20.34C113.303 18.655 114.758 16.77 116.384 16.77C117.533 16.77 118.346 17.645 118.346 18.455C118.346 19.13 117.904 19.805 117.262 20.105C116.856 20.275 116.55 20.24 116.349 20.035C115.877 19.53 115.471 19.325 114.929 19.325C114.051 19.325 112.967 20.335 112.225 22.225V28.39C112.225 30.615 112.395 30.815 114.999 31.02V31.895H107.223V31.02C109.32 30.82 109.556 30.615 109.556 28.39V21.415C109.556 19.19 109.385 19.055 107.458 18.785V18.045C109.114 17.775 110.604 17.37 112.225 16.665V20.34H112.29Z" fill="#298CC8" />
+              <path d="M118.406 31.9001V31.0251C120.539 30.8251 120.774 30.6201 120.774 28.3301V21.3901C120.774 19.3001 120.674 19.1651 118.642 18.8301V18.0201C120.368 17.7501 121.953 17.3101 123.443 16.7051V28.3301C123.443 30.6201 123.679 30.8251 125.847 31.0251V31.9001H118.406ZM120.197 12.1201C120.197 11.1101 121.01 10.3701 121.923 10.3701C122.836 10.3701 123.614 11.1101 123.614 12.1201C123.614 13.0301 122.872 13.8401 121.888 13.8401C121.01 13.8401 120.197 13.0301 120.197 12.1201Z" fill="#298CC8" />
+              <path d="M136.332 17.1699V16.4299C136.332 15.3849 136.467 14.4099 136.703 13.6649C136.939 12.9199 137.481 11.2699 139.307 9.7199C140.491 8.6749 141.71 8.0699 143.025 7.8999C144.174 7.9349 145.157 8.4049 145.694 9.0449C146 9.4149 146.03 9.8549 145.864 10.2249C145.764 10.4949 145.558 10.7649 145.222 11.0349C144.916 11.2699 144.615 11.2699 144.309 10.9349C143.632 10.3299 142.688 9.6899 141.57 9.6899C140.692 9.6899 140.15 10.0949 139.779 10.6999C139.337 11.3399 138.966 12.9599 139.001 15.8199V17.1699H142.99C143.19 17.4749 143.025 18.2799 142.653 18.4849H139.001V28.1899C139.001 30.6849 139.237 30.7849 141.911 31.0549V31.8949H133.928V31.0199C136.091 30.8199 136.332 30.6499 136.332 28.4249V18.4849H133.964L133.828 18.1499L134.741 17.1749H136.332V17.1699Z" fill="#298CC8" />
+              <path d="M128.109 17.1699V16.4299C128.109 15.3849 128.244 14.4099 128.48 13.6649C128.716 12.9199 129.258 11.2699 131.084 9.7199C132.268 8.6749 133.487 8.0699 134.802 7.8999C135.951 7.9349 136.934 8.4049 137.471 9.0449C137.777 9.4149 137.807 9.8549 137.642 10.2249C137.541 10.4949 137.336 10.7649 136.999 11.0349C136.693 11.2699 136.392 11.2699 136.086 10.9349C135.409 10.3299 134.466 9.6899 133.347 9.6899C132.469 9.6899 131.927 10.0949 131.556 10.6999C131.114 11.3399 130.743 12.9599 130.778 15.8199V17.1699H134.767C134.968 17.4749 134.802 18.2799 134.431 18.4849H130.778V28.1899C130.778 30.6849 131.014 30.7849 133.688 31.0549V31.8949H125.706V31.0199C127.868 30.8199 128.109 30.6499 128.109 28.4249V18.4849H125.741L125.605 18.1499L126.519 17.1749H128.109V17.1699Z" fill="#298CC8" />
+              <path d="M32.492 11.1401C27.8511 25.7801 15.3984 36.2601 15.3984 36.2601C18.8151 39.9351 21.399 41.7001 21.399 41.7001C32.487 32.0151 37.7199 21.3701 40.1683 14.0251C40.1683 14.0251 37.469 12.5351 32.487 11.1401H32.492Z" fill="#005F98" />
+              <path d="M10.7067 9.6751C28.1615 5.6551 40.584 12.7301 40.584 12.7301C42.044 7.9601 42.2748 4.8801 42.2748 4.8801C28.3521 -1.4349 16.3661 -0.349896 8.75 1.6851C8.75 1.6851 9.4223 6.1401 10.7067 9.6751Z" fill="#005F98" />
+              <path d="M20.3748 29.5052C9.71327 17.1252 7.51072 2.03516 7.51072 2.03516C2.74942 3.45016 0 5.13016 0 5.13016C2.72935 19.6002 9.38715 29.5152 14.5599 35.3352C14.5599 35.3352 18.699 31.5102 20.3748 29.5052Z" fill="#005F98" />
+              <path d="M11.1535 10.9801C11.1535 10.9801 20.2948 8.25513 31.1419 10.8001C31.1419 10.8001 29.0497 19.2051 21.2882 28.4301C21.2882 28.4301 14.53 21.2901 11.1484 10.9801H11.1535Z" fill="#298CC8" />
+            </svg>
+          </a>
+          <button type="button" id="toggle-nav" class="group/tn lg:hidden" aria-controls="main-nav" aria-expanded="false">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" class="w-[30px]">
+              <rect class="origin-center group-aria-expanded/tn:w-[80%] group-aria-expanded/tn:x-10 group-aria-expanded/tn:y-45 group-aria-expanded/tn:rotate-45" width="100" height="10" x="0" y="15" fill="#003159" />
+              <rect class="origin-center group-aria-expanded/tn:w-[80%] group-aria-expanded/tn:x-10 group-aria-expanded/tn:opacity-0" width="70" height="10" x="30" y="45" fill="#003159" />
+              <rect class="origin-center group-aria-expanded/tn:w-[80%] group-aria-expanded/tn:x-10 group-aria-expanded/tn:y-45 group-aria-expanded/tn:-rotate-45" width="70" height="10" x="30" y="75" fill="#003159" />
+            </svg>
+          </button>
+          <div class="absolute inset-x-0 top-[88px] md:top-[77px] z-20 data-[visible=false]:hidden lg:static lg:data-[visible=false]:block" id="main-nav" data-visible="false">
+            <ul class="bg-primary-blue flex flex-col lg:flex-row lg:bg-grayscale-white">
+              <li>
+                <div class="h-[77px] flex flex-row items-center justify-between mx-3 2xs:mx-7 lg:mx-0">
+                  <button type="button" class="peer/wwd text-grayscale-white lg:text-primary-blue text-size-body1 hover:text-size-bold1 lg:text-size-body2 lg:hover:text-size-bold2" id="toggle-navp-what-we-do" aria-controls="navp-what-we-do" aria-expanded="false">What We Do</button>
+                  <svg viewBox="0 0 26 14" xmlns="http://www.w3.org/2000/svg" class="w-[26px] h-[14px] lg:hidden peer-aria-expanded/wwd:rotate-180">
+                    <path d="M25.7935 0.613079L25.3815 0.20369C25.1084 -0.0672702 24.6658 -0.0672702 24.3924 0.20369L12.9987 11.5078L1.60567 0.203401C1.33291 -0.0677907 0.889963 -0.0677906 0.616621 0.203343L0.204569 0.612154C-0.0681896 0.883115 -0.0681896 1.32223 0.204569 1.59342L12.505 13.797C12.7783 14.0677 13.2213 14.0677 13.4946 13.797L25.795 1.5929C26.0683 1.32194 26.0683 0.882247 25.795 0.611634L25.7935 0.613079Z" fill="#FEFEFE" />
+                  </svg>
+                  <svg viewBox="0 0 15 38" xmlns="http://www.w3.org/2000/svg" class="w-[15px] h-[38px] hidden lg:block lg:mx-5">
+                    <rect x="13.8379" y="0.504883" width="1" height="39" transform="rotate(20 13.8379 0.504883)" fill="#D9D9D9" />
+                  </svg>
+                </div>
+                <div class="hidden data-[visible=true]:block lg:absolute lg:left-0 lg:right-0 lg:bg-primary-blue lg:min-h-[854px]" id="navp-what-we-do" data-visible="false">
+                  <ul class="bg-dark-blue flex flex-col lg:flex-row lg:items-center lg:justify-evenly">
+                    <li class="border-b-2 border-solid border-b-primary-blue lg:border-none">
+                      <div class="h-[77px] flex flex-row items-center justify-between lg:hover:border-b-2 lg:hover:border-solid lg:hover:border-secondary-gold mx-3 2xs:mx-7 lg:mx-0">
+                        <button type="button" class="peer/ci text-grayscale-white text-size-body2 lg:hidden" id="toggle-navc-commercial-insurance" aria-controls="navc-commercial-insurance" aria-expanded="false">Commercial Insurance</button>
+                        <a href="#" class="hidden text-grayscale-white text-size-body2 lg:block">Commercial Insurance</a>
+                        <svg viewBox="0 0 26 14" xmlns="http://www.w3.org/2000/svg" class="w-[26px] h-[14px] lg:hidden peer-aria-expanded/ci:rotate-180">
+                          <path d="M25.7935 0.613079L25.3815 0.20369C25.1084 -0.0672702 24.6658 -0.0672702 24.3924 0.20369L12.9987 11.5078L1.60567 0.203401C1.33291 -0.0677907 0.889963 -0.0677906 0.616621 0.203343L0.204569 0.612154C-0.0681896 0.883115 -0.0681896 1.32223 0.204569 1.59342L12.505 13.797C12.7783 14.0677 13.2213 14.0677 13.4946 13.797L25.795 1.5929C26.0683 1.32194 26.0683 0.882247 25.795 0.611634L25.7935 0.613079Z" fill="#FEFEFE" />
+                        </svg>
+                      </div>
+                      <div class="hidden data-[visible=true]:block lg:absolute lg:block mx-3 2xs:mx-7 lg:mx-0" id="navc-commercial-insurance" data-visible="false">
+                        <ul class="grid grid-cols-1 gap-y-7 first:mt-7 last:mb-7 md:grid-cols-2 md:gap-x-7 lg:grid-cols-1 lg:gap-x-0">
+                          <li class="lg:hidden">
+                            <a href="#" class="text-grayscale-white text-size-body2">Commercial Insurance Overview</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Property & Casualty</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Bonding & Surety</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Cyber Liability</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Executive Risk</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Professional Liability</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Management Liability</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Captives</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Workers’ Comp</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Small Business</a>
+                          </li>
+
+                        </ul>
+
+                      </div>
+                    </li>
+                    <li class="border-b-2 border-solid border-b-primary-blue lg:border-none">
+                      <div class="h-[77px] flex flex-row items-center justify-between lg:hover:border-b-2 lg:hover:border-solid lg:hover:border-secondary-gold mx-3 2xs:mx-7 lg:mx-0">
+                        <button type="button" class="peer/rm text-grayscale-white text-size-body2 lg:hidden" id="toggle-navc-risk-management" aria-controls="navc-risk-management" aria-expanded="false">Risk Management</button>
+                        <a href="#" class="hidden text-grayscale-white text-size-body2 lg:text-size-body3 lg:block">Risk Management</a>
+                        <svg viewBox="0 0 26 14" xmlns="http://www.w3.org/2000/svg" class="w-[26px] h-[14px] lg:hidden peer-aria-expanded/rm:rotate-180">
+                          <path d="M25.7935 0.613079L25.3815 0.20369C25.1084 -0.0672702 24.6658 -0.0672702 24.3924 0.20369L12.9987 11.5078L1.60567 0.203401C1.33291 -0.0677907 0.889963 -0.0677906 0.616621 0.203343L0.204569 0.612154C-0.0681896 0.883115 -0.0681896 1.32223 0.204569 1.59342L12.505 13.797C12.7783 14.0677 13.2213 14.0677 13.4946 13.797L25.795 1.5929C26.0683 1.32194 26.0683 0.882247 25.795 0.611634L25.7935 0.613079Z" fill="#FEFEFE" />
+                        </svg>
+                      </div>
+                      <div class="hidden data-[visible=true]:block lg:absolute lg:block mx-3 2xs:mx-7 lg:mx-0" id="navc-risk-management" data-visible="false">
+                        <ul class="grid grid-cols-1 gap-y-7 first:mt-7 last:mb-7 md:grid-cols-2 md:gap-x-7 lg:grid-cols-1 lg:*:max-w-[180px] lg:gap-x-0">
+                          <li class="lg:hidden">
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Risk Management Overview</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Risk Control</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Analytic Solutions</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Claim Consulting</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Client Education and Training Courses</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="border-b-2 border-solid border-b-primary-blue lg:border-none">
+                      <div class="h-[77px] flex flex-row items-center justify-between lg:hover:border-b-2 lg:hover:border-solid lg:hover:border-secondary-gold mx-3 2xs:mx-7 lg:mx-0">
+                        <button type="button" class="peer/eb text-grayscale-white text-size-body2 lg:hidden" id="toggle-navc-employee-benefits" aria-controls="navc-employee-benefits" aria-expanded="false">Employee Benefits</button>
+                        <a href="#" class="hidden text-grayscale-white text-size-body2 lg:text-size-body3 lg:block">Employee Benefits</a>
+                        <svg viewBox="0 0 26 14" xmlns="http://www.w3.org/2000/svg" class="w-[26px] h-[14px] lg:hidden peer-aria-expanded/eb:rotate-180">
+                          <path d="M25.7935 0.613079L25.3815 0.20369C25.1084 -0.0672702 24.6658 -0.0672702 24.3924 0.20369L12.9987 11.5078L1.60567 0.203401C1.33291 -0.0677907 0.889963 -0.0677906 0.616621 0.203343L0.204569 0.612154C-0.0681896 0.883115 -0.0681896 1.32223 0.204569 1.59342L12.505 13.797C12.7783 14.0677 13.2213 14.0677 13.4946 13.797L25.795 1.5929C26.0683 1.32194 26.0683 0.882247 25.795 0.611634L25.7935 0.613079Z" fill="#FEFEFE" />
+                        </svg>
+                      </div>
+                      <div class="hidden data-[visible=true]:block lg:absolute lg:block mx-3 2xs:mx-7 lg:mx-0" id="navc-employee-benefits" data-visible="false">
+                        <ul class="grid grid-cols-1 gap-y-7 first:mt-7 last:mb-7 md:grid-cols-2 md:gap-x-7 lg:grid-cols-1 lg:*:max-w-[240px] lg:gap-x-0">
+                          <li class="lg:hidden">
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Employee Benefits Overview</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Compliance</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Actuarial & Underwriting</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Data and Analytics Insights</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Human Resources Advisory</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Pharmacy Benefits Consulting</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Benefits Administration Technology</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Workplace Wellness Programs</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Health Management Services</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Peak Health</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Communications</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Flex Benefits</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Retirement Consulting</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">COBRA Administration</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                    <li class="border-b-2 border-solid border-b-primary-blue lg:border-none">
+                      <div class="h-[77px] flex flex-row items-center justify-between lg:hover:border-b-2 lg:hover:border-solid lg:hover:border-secondary-gold mx-3 2xs:mx-7 lg:mx-0">
+                        <button type="button" class="peer/pi text-grayscale-white text-size-body2 lg:hidden" id="toggle-navc-personal-insurance" aria-controls="navc-personal-insurance" aria-expanded="false">Personal Insurance</button>
+                        <a href="#" class="hidden text-grayscale-white text-size-body2 lg:text-size-body3 lg:block">Personal Insurance</a>
+                        <svg viewBox="0 0 26 14" xmlns="http://www.w3.org/2000/svg" class="w-[26px] h-[14px] lg:hidden peer-aria-expanded/pi:rotate-180">
+                          <path d="M25.7935 0.613079L25.3815 0.20369C25.1084 -0.0672702 24.6658 -0.0672702 24.3924 0.20369L12.9987 11.5078L1.60567 0.203401C1.33291 -0.0677907 0.889963 -0.0677906 0.616621 0.203343L0.204569 0.612154C-0.0681896 0.883115 -0.0681896 1.32223 0.204569 1.59342L12.505 13.797C12.7783 14.0677 13.2213 14.0677 13.4946 13.797L25.795 1.5929C26.0683 1.32194 26.0683 0.882247 25.795 0.611634L25.7935 0.613079Z" fill="#FEFEFE" />
+                        </svg>
+                      </div>
+                      <div class="hidden data-[visible=true]:block lg:absolute lg:block mx-3 2xs:mx-7 lg:mx-0" id="navc-personal-insurance" data-visible="false">
+                        <ul class="grid grid-cols-1 gap-y-7 first:mt-7 last:mb-7 md:grid-cols-2 md:gap-x-7 lg:grid-cols-1 lg:gap-x-0">
+                          <li class="lg:hidden">
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Personal Insurance Overview</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Private Client</a>
+                          </li>
+                          <li>
+                            <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Get a Quote</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <div class="h-[77px] flex flex-row items-center justify-between mx-3 2xs:mx-7 lg:mx-0">
+                  <button type="button" class="peer/ind text-grayscale-white lg:text-primary-blue text-size-body1 hover:text-size-bold1 lg:text-size-body2 lg:hover:text-size-bold2" id="toggle-navp-industries" aria-controls="navp-industries" aria-expanded="false">Industries</button>
+                  <svg viewBox="0 0 26 14" xmlns="http://www.w3.org/2000/svg" class="w-[26px] h-[14px] lg:hidden peer-aria-expanded/ind:rotate-180">
+                    <path d="M25.7935 0.613079L25.3815 0.20369C25.1084 -0.0672702 24.6658 -0.0672702 24.3924 0.20369L12.9987 11.5078L1.60567 0.203401C1.33291 -0.0677907 0.889963 -0.0677906 0.616621 0.203343L0.204569 0.612154C-0.0681896 0.883115 -0.0681896 1.32223 0.204569 1.59342L12.505 13.797C12.7783 14.0677 13.2213 14.0677 13.4946 13.797L25.795 1.5929C26.0683 1.32194 26.0683 0.882247 25.795 0.611634L25.7935 0.613079Z" fill="#FEFEFE" />
+                  </svg>
+                  <svg viewBox="0 0 15 38" xmlns="http://www.w3.org/2000/svg" class="w-[15px] h-[38px] hidden lg:block lg:mx-5">
+                    <rect x="13.8379" y="0.504883" width="1" height="39" transform="rotate(20 13.8379 0.504883)" fill="#D9D9D9" />
+                  </svg>
+                </div>
+                <div class="bg-dark-blue data-[visible=false]:hidden data-[visible=true]:block lg:absolute lg:left-0 lg:right-0 lg:bg-primary-blue" id="navp-industries" data-visible="false">
+                  <ul class="grid grid-cols-1 gap-y-7 first:pt-7 last:pb-7 md:grid-cols-2 md:gap-x-7 lg:grid-cols-1 lg:relative lg:left-1/2 lg:right-1/2 lg:gap-x-0 mx-3 2xs:mx-7 lg:mx-0">
+                    <li>
+                      <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Aviation & Aerospace</a>
+                    </li>
+                    <li>
+                      <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Construction</a>
+                    </li>
+                    <li>
+                      <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Energy</a>
+                    </li>
+                    <li>
+                      <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Executive Risk Advisors</a>
+                    </li>
+                    <li>
+                      <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Private Equity</a>
+                    </li>
+                    <li>
+                      <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Real Estate & Hospitality</a>
+                    </li>
+                    <li>
+                      <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Surety & Bonding</a>
+                    </li>
+                    <li>
+                      <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Transportation</a>
+                    </li>
+                    <li>
+                      <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">More Industries</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <div class="h-[77px] flex flex-row items-center justify-between mx-3 2xs:mx-7 lg:mx-0">
+                  <button type="button" class="peer/abo text-grayscale-white lg:text-primary-blue text-size-body1 hover:text-size-bold1 lg:text-size-body2 lg:hover:text-size-bold2" id="toggle-navp-about" aria-controls="navp-about" aria-expanded="false">About</button>
+                  <svg viewBox="0 0 26 14" xmlns="http://www.w3.org/2000/svg" class="w-[26px] h-[14px] lg:hidden peer-aria-expanded/abo:rotate-180">
+                    <path d="M25.7935 0.613079L25.3815 0.20369C25.1084 -0.0672702 24.6658 -0.0672702 24.3924 0.20369L12.9987 11.5078L1.60567 0.203401C1.33291 -0.0677907 0.889963 -0.0677906 0.616621 0.203343L0.204569 0.612154C-0.0681896 0.883115 -0.0681896 1.32223 0.204569 1.59342L12.505 13.797C12.7783 14.0677 13.2213 14.0677 13.4946 13.797L25.795 1.5929C26.0683 1.32194 26.0683 0.882247 25.795 0.611634L25.7935 0.613079Z" fill="#FEFEFE" />
+                  </svg>
+                  <svg viewBox="0 0 15 38" xmlns="http://www.w3.org/2000/svg" class="w-[15px] h-[38px] hidden lg:block lg:mx-5">
+                    <rect x="13.8379" y="0.504883" width="1" height="39" transform="rotate(20 13.8379 0.504883)" fill="#D9D9D9" />
+                  </svg>
+                </div>
+                <div class="bg-dark-blue data-[visible=false]:hidden data-[visible=true]:block lg:absolute lg:left-0 lg:right-0 lg:bg-primary-blue lg:h-[77px]" id="navp-about" data-visible="false">
+                  <ul class="grid grid-cols-1 gap-y-7 first:pt-7 last:pb-7 md:grid-cols-2 md:gap-x-7 lg:flex lg:flex-row lg:items-center lg:justify-center lg:gap-y-0 lg:gap-x-20 lg:first:p-0 lg:last:p-0 lg:h-full mx-3 2xs:mx-7 lg:mx-0">
+                    <li>
+                      <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">About Us</a>
+                    </li>
+                    <li>
+                      <a href="#" class="text-grayscale-white text-size-body2 lg:text-size-body3">Careers</a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <div class="h-[77px] flex items-center justify-between mx-3 2xs:mx-7 lg:mx-0">
+                  <div>
+                    <a href="#" class="text-grayscale-white lg:text-primary-blue text-size-body1 hover:text-size-bold1 lg:text-size-body2 lg:hover:text-size-bold2">Insights</a>
+                  </div>
+                  <svg viewBox="0 0 15 38" xmlns="http://www.w3.org/2000/svg" class="w-[15px] h-[38px] hidden lg:block lg:mx-5">
+                    <rect x="13.8379" y="0.504883" width="1" height="39" transform="rotate(20 13.8379 0.504883)" fill="#D9D9D9" />
+                  </svg>
+                </div>
+              </li>
+              <li>
+                <div class="h-[77px] flex items-center justify-center">
+                  <a href="#" class="btn-primary-rev lg:btn-primary">Contact us</a>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>    
+  </header>
+
+  <main>
+    
+
+    <section class="hidden animate-section mb-[140px]">
+      <div>
+        <svg viewBox="0 0 390 199" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+          <mask id="mask0_0" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="390" height="200">
+            <rect width="390" height="199.604" fill="#D9D9D9" />
+          </mask>
+          <g mask="url(#mask0_0)">
+            <rect y="-56.875" width="395.146" height="260.812" fill="url(#pattern0_0)" />
+            <rect x="-11" y="-63" width="422" height="282" fill="url(#pattern0_1)" />
+            <g style="mix-blend-mode:multiply">
+              <rect width="390" height="199.604" fill="url(#paint0_linear0)" fill-opacity="0.6" />
+            </g>
+            <path d="M390 199.5V29.9998C371.5 23.5 356.5 21.5 356.5 21.5C331 98.5 298.5 140 248.5 199.5H390Z" fill="white" fill-opacity="0.2" />
+            <path d="M177 0H0V200H248L272 171.5C209.5 109 177 0 177 0Z" fill="white" fill-opacity="0.2" />
+            <path d="M390 30V0H176.5C180 8 186 21.5 186 21.5C268.8 -0.5 356.5 18 390 30Z" fill="white" fill-opacity="0.2" />
+            <path d="M164.938 -45.314C167.721 -32.7385 175.996 -3.64212 181.065 10.9877C187.401 29.2749 209 101.848 272.213 171.973" stroke="#FEFEFE" stroke-width="2" />
+            <path d="M185.24 22.3629C196.616 18.619 230.742 11.1313 276.244 11.1313C321.746 11.1313 371.04 23.7068 390 29.9946" stroke="#FEFEFE" stroke-width="2" />
+            <path d="M356.45 21.0674C351.074 38.5866 334.896 81.3403 314.548 113.079C288.053 154.406 272.213 171.973 246.15 201.636" stroke="#FEFEFE" stroke-width="2" />
+          </g>
+          <defs>
+            <pattern id="pattern0_0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_0" transform="matrix(0.000244141 0 0 0.000369887 0 -0.00563549)" />
+            </pattern>
+            <pattern id="pattern0_1" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0_0" transform="matrix(0.000244421 0 0 0.000365764 -0.000573782 0)" />
+            </pattern>
+            <linearGradient id="paint0_linear0" x1="323.375" y1="115.24" x2="64.0077" y2="140.29" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#120D1F" stop-opacity="0" />
+              <stop offset="1" stop-color="#041435" />
+            </linearGradient>
+            <image id="image0_0" width="4096" height="2734" xlink:href="" />        
+          </defs>
+        </svg>
+
+      </div>
+      
+        
+
+    </section>
+
+    
+
+    
+
+  </main>
+
+  <footer class="relative">
+
+    <div class="space-y-14 md:space-y-0">
+
+      <div class="space-y-14 md:space-y-0 lg:flex lg:flex-row lg:items-center lg:justify-between lg:border-y-2 lg:border-solid lg:border-t-grayscale-light-gray lg:border-b-light-blue lg:px-7">
+        <div class="border-y-2 border-solid border-t-grayscale-light-gray border-b-light-blue lg:border-none">
+          <div class="min-h-[88px] flex flex-col items-center justify-center">
+            <a href="/index.html">
+              <svg viewBox="0 0 146 42" xmlns="http://www.w3.org/2000/svg" class="w-[146px] h-[42px] md:w-[178px] md:h-[51px]">
+                <path d="M66.4936 31.9001V30.9551C69.233 30.6851 69.3684 30.5151 69.3333 26.9451L69.233 13.1951H69.0975L60.8442 31.6601H60.1669L52.591 13.6651H52.5257L52.019 23.2701C51.8835 26.0351 51.8835 27.5151 51.9187 28.8651C51.9839 30.4801 52.7967 30.7201 55.0293 30.9551V31.9001H47.1523V30.9551C49.1141 30.7201 49.7914 30.3501 50.0272 28.9351C50.1978 27.7551 50.3985 26.2701 50.6694 22.7701L51.141 15.7601C51.447 11.3801 51.2765 11.2451 48.2009 10.9401V9.99512H53.7449L61.4563 26.8451L69.2681 9.99512H75.0178V10.9401C72.0426 11.2101 71.8068 11.2751 71.9071 14.7501L72.2433 26.9501C72.3436 30.5201 72.444 30.6901 75.389 30.9601V31.9051H66.4936V31.9001Z" fill="#298CC8" />
+                <path d="M84.2286 19.5402C83.0044 21.1452 81.143 22.3652 79.5024 22.3652C76.0004 22.3652 73.9434 19.5402 73.9434 16.5752C73.9434 14.4402 74.8615 12.5852 76.7229 11.1452C78.1678 10.0352 79.8385 9.59521 80.9223 9.59521C82.006 9.59521 82.9492 9.95522 83.3957 10.3152C83.757 10.6202 83.8423 10.8702 83.8423 11.1752C83.8423 11.7552 83.2302 12.3652 82.9241 12.3652C82.7836 12.3652 82.6482 12.2802 82.3973 12.0602C81.5645 11.2852 80.5911 10.9252 79.6178 10.9252C77.7815 10.9252 76.171 12.4502 76.171 15.3552C76.171 19.2052 78.81 20.4802 80.3704 20.4802C81.5645 20.4802 82.4826 20.1452 83.762 18.9552L84.2336 19.5352L84.2286 19.5402Z" fill="#298CC8" />
+                <path d="M107.056 22.6652C105.029 22.9702 104.893 23.1352 104.893 25.1252V27.9902C104.893 29.1702 104.928 30.2502 105.129 31.1602C103.032 31.6652 100.257 32.4052 97.5531 32.4052C90.1127 32.4052 85.1406 27.7902 85.1406 21.1152C85.1406 13.2952 91.4322 9.49023 98.0599 9.49023C100.864 9.49023 103.468 10.2302 104.552 10.4652C104.652 11.6452 104.823 13.5002 105.094 15.7202L104.146 15.9202C103.333 11.8102 100.764 10.6952 97.5531 10.6952C92.3804 10.6952 88.5924 14.4702 88.5924 20.7052C88.5924 25.5602 91.4673 31.2202 97.9946 31.2202C99.1436 31.2202 100.192 30.9852 100.935 30.6152C101.612 30.2452 102.018 29.8402 102.018 28.4252V25.5602C102.018 23.1352 101.783 22.9302 98.4663 22.6602V21.7502H107.056V22.6602V22.6652Z" fill="#298CC8" />
+                <path d="M112.29 20.34C113.303 18.655 114.758 16.77 116.384 16.77C117.533 16.77 118.346 17.645 118.346 18.455C118.346 19.13 117.904 19.805 117.262 20.105C116.856 20.275 116.55 20.24 116.349 20.035C115.877 19.53 115.471 19.325 114.929 19.325C114.051 19.325 112.967 20.335 112.225 22.225V28.39C112.225 30.615 112.395 30.815 114.999 31.02V31.895H107.223V31.02C109.32 30.82 109.556 30.615 109.556 28.39V21.415C109.556 19.19 109.385 19.055 107.458 18.785V18.045C109.114 17.775 110.604 17.37 112.225 16.665V20.34H112.29Z" fill="#298CC8" />
+                <path d="M118.406 31.9001V31.0251C120.539 30.8251 120.774 30.6201 120.774 28.3301V21.3901C120.774 19.3001 120.674 19.1651 118.642 18.8301V18.0201C120.368 17.7501 121.953 17.3101 123.443 16.7051V28.3301C123.443 30.6201 123.679 30.8251 125.847 31.0251V31.9001H118.406ZM120.197 12.1201C120.197 11.1101 121.01 10.3701 121.923 10.3701C122.836 10.3701 123.614 11.1101 123.614 12.1201C123.614 13.0301 122.872 13.8401 121.888 13.8401C121.01 13.8401 120.197 13.0301 120.197 12.1201Z" fill="#298CC8" />
+                <path d="M136.332 17.1699V16.4299C136.332 15.3849 136.467 14.4099 136.703 13.6649C136.939 12.9199 137.481 11.2699 139.307 9.7199C140.491 8.6749 141.71 8.0699 143.025 7.8999C144.174 7.9349 145.157 8.4049 145.694 9.0449C146 9.4149 146.03 9.8549 145.864 10.2249C145.764 10.4949 145.558 10.7649 145.222 11.0349C144.916 11.2699 144.615 11.2699 144.309 10.9349C143.632 10.3299 142.688 9.6899 141.57 9.6899C140.692 9.6899 140.15 10.0949 139.779 10.6999C139.337 11.3399 138.966 12.9599 139.001 15.8199V17.1699H142.99C143.19 17.4749 143.025 18.2799 142.653 18.4849H139.001V28.1899C139.001 30.6849 139.237 30.7849 141.911 31.0549V31.8949H133.928V31.0199C136.091 30.8199 136.332 30.6499 136.332 28.4249V18.4849H133.964L133.828 18.1499L134.741 17.1749H136.332V17.1699Z" fill="#298CC8" />
+                <path d="M128.109 17.1699V16.4299C128.109 15.3849 128.244 14.4099 128.48 13.6649C128.716 12.9199 129.258 11.2699 131.084 9.7199C132.268 8.6749 133.487 8.0699 134.802 7.8999C135.951 7.9349 136.934 8.4049 137.471 9.0449C137.777 9.4149 137.807 9.8549 137.642 10.2249C137.541 10.4949 137.336 10.7649 136.999 11.0349C136.693 11.2699 136.392 11.2699 136.086 10.9349C135.409 10.3299 134.466 9.6899 133.347 9.6899C132.469 9.6899 131.927 10.0949 131.556 10.6999C131.114 11.3399 130.743 12.9599 130.778 15.8199V17.1699H134.767C134.968 17.4749 134.802 18.2799 134.431 18.4849H130.778V28.1899C130.778 30.6849 131.014 30.7849 133.688 31.0549V31.8949H125.706V31.0199C127.868 30.8199 128.109 30.6499 128.109 28.4249V18.4849H125.741L125.605 18.1499L126.519 17.1749H128.109V17.1699Z" fill="#298CC8" />
+                <path d="M32.492 11.1401C27.8511 25.7801 15.3984 36.2601 15.3984 36.2601C18.8151 39.9351 21.399 41.7001 21.399 41.7001C32.487 32.0151 37.7199 21.3701 40.1683 14.0251C40.1683 14.0251 37.469 12.5351 32.487 11.1401H32.492Z" fill="#005F98" />
+                <path d="M10.7067 9.6751C28.1615 5.6551 40.584 12.7301 40.584 12.7301C42.044 7.9601 42.2748 4.8801 42.2748 4.8801C28.3521 -1.4349 16.3661 -0.349896 8.75 1.6851C8.75 1.6851 9.4223 6.1401 10.7067 9.6751Z" fill="#005F98" />
+                <path d="M20.3748 29.5052C9.71327 17.1252 7.51072 2.03516 7.51072 2.03516C2.74942 3.45016 0 5.13016 0 5.13016C2.72935 19.6002 9.38715 29.5152 14.5599 35.3352C14.5599 35.3352 18.699 31.5102 20.3748 29.5052Z" fill="#005F98" />
+                <path d="M11.1535 10.9801C11.1535 10.9801 20.2948 8.25513 31.1419 10.8001C31.1419 10.8001 29.0497 19.2051 21.2882 28.4301C21.2882 28.4301 14.53 21.2901 11.1484 10.9801H11.1535Z" fill="#298CC8" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <ul class="flex flex-col items-center justify-center gap-y-12 md:min-h-[88px] md:gap-y-0 md:flex-row md:gap-x-12">
+            <li>
+              <a href="" class="text-primary-blue text-size-body1 lg:text-size-body2">What We Do</a>
+            </li>
+            <li>
+              <a href="" class="text-primary-blue text-size-body1 lg:text-size-body2">Industries</a>
+            </li>
+            <li>
+              <a href="" class="text-primary-blue text-size-body1 lg:text-size-body2">About</a>
+            </li>
+            <li>
+              <a href="" class="text-primary-blue text-size-body1 lg:text-size-body2">Insights</a>
+            </li>
+            <li>
+              <a href="" class="text-primary-blue text-size-body1 lg:text-size-body2">Careers</a>
+            </li>
+          </ul>
+        </div>  
+      </div>
+
+      <div class="space-y-9 max-w-[344px] mx-auto lg:min-h-[192px] md:absolute md:left-14 md:top-[232px] lg:top-36">
+        <div class="space-y-4">
+          <h3 class="text-center text-primary-blue text-size-headline3 md:text-left">Let’s Connect</h3>
+          <p class="text-center text-primary-blue text-size-body3 md:text-left">Our approach begins with understanding your needs and goals, so let’s talk.</p>
+        </div>      
+        <div class="text-center md:text-left">
+          <a href="http://" class="btn-primary">Contact Us</a>
+        </div>      
+      </div>
+
+      <div class="flex flex-row items-center justify-center gap-x-1 md:absolute md:right-14 md:top-[390px] lg:top-[302px]">
+        <h4 class="text-primary-blue text-size-headline4">Follow us</h4>
+        <a href="http://www.linkedin.com/">
+          <svg width="30" height="29" viewBox="0 0 30 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M25.9994 1.81226H4.2461C3.24933 1.81226 2.43945 2.63346 2.43945 3.64155V25.3553C2.43945 26.3633 3.24933 27.1845 4.2461 27.1845H25.9994C26.9962 27.1845 27.8117 26.3633 27.8117 25.3553V3.64155C27.8117 2.63346 26.9962 1.81226 25.9994 1.81226ZM10.1078 23.5599H6.34724V11.4515H10.1134V23.5599H10.1078ZM8.22751 9.79773C7.02119 9.79773 6.04708 8.81795 6.04708 7.6173C6.04708 6.41665 7.02119 5.43687 8.22751 5.43687C9.42816 5.43687 10.4079 6.41665 10.4079 7.6173C10.4079 8.82362 9.43382 9.79773 8.22751 9.79773ZM24.2041 23.5599H20.4436V17.6699C20.4436 16.2654 20.4153 14.4588 18.4897 14.4588C16.5301 14.4588 16.23 15.9879 16.23 17.568V23.5599H12.4694V11.4515H16.0771V13.1052H16.128C16.6321 12.1537 17.8611 11.1513 19.6903 11.1513C23.4962 11.1513 24.2041 13.6602 24.2041 16.9224V23.5599Z" fill="#005D98"/>
+          </svg>          
+        </a>
+      </div>      
+      
+      <div class="bg-dark-blue min-h-[116px] md:min-h-[82px] flex flex-col items-center justify-center gap-y-2 md:w-full md:absolute md:top-[480px] lg:top-[392px] md:flex-row md:justify-around lg:justify-end lg:gap-x-16 lg:px-7">
+        <ul>
+          <li class="inline">
+            <a href="" class="text-grayscale-white text-size-body4">Privacy Policy</a>
+          </li>
+          <li class="inline space-x-1">
+            <span class="text-grayscale-white text-size-body4">|</span>
+          </li>
+          <li class="inline">
+            <a href="" class="text-grayscale-white text-size-body4">Terms of Use</a>
+          </li>
+        </ul>
+        <div>
+          <p class="text-center text-grayscale-white text-size-body4">© 2024, McGriff Insurance Services, LLC. All Rights Reserved.</p>
+        </div>
+      </div>
+
+  </footer>
+
+
+  
+
+</body>
+
+</html>
